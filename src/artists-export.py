@@ -5,7 +5,7 @@ from pathlib import Path
 
 import polars
 
-DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR = Path(__file__).parent.parent / "_data"
 CACHE_DIR = DATA_DIR / "artists"
 
 FIRST_RELEASE_OVERRIDES = {

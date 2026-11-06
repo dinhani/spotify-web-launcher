@@ -6,14 +6,14 @@ Arquivo de retomada de sessão. Não commitado.
 
 Usar o histórico estendido de streams do Spotify (pedido em 2026-09-26, ver "Planned: long-term history" no `AGENTS.md`) em duas frentes:
 
-1. **Análise manual (feita):** cruzar o histórico com os artistas seguidos (`data/artists.tsv`) e achar artistas que ouvi bastante mas não sigo.
+1. **Análise manual (feita):** cruzar o histórico com os artistas seguidos (`_data/artists.tsv`) e achar artistas que ouvi bastante mas não sigo.
 2. **Integração no app (pendente):** ver se dá para gerar valor na aplicação com esses dados. Ainda não discutido.
 
 ## Dados
 
 - Export bruto: `Z:/pessoal/redes-sociais/spotify-2026-09` (`Streaming_History_Audio_*.json`, `Streaming_History_Video_*.json`, 2015–2026).
-- Extração: `just spotify-import` → `src/spotify-history.py` → `data/spotify-history.tsv`.
-- `data/spotify-history.tsv` está no `.gitignore`: **os dados não são commitados** por enquanto. Só o script, a receita e o `.gitignore` foram commitados.
+- Extração: `just spotify-import` → `src/spotify-history.py` → `_data/spotify-history.tsv`.
+- `_data/spotify-history.tsv` está no `.gitignore`: **os dados não são commitados** por enquanto. Só o script, a receita e o `.gitignore` foram commitados.
 
 ### Decisões da extração
 
@@ -62,11 +62,11 @@ Eu decidir quais seguir no Spotify; depois `just spotify-download`, `just export
 ```python
 import polars as pl
 
-h = pl.read_csv("data/spotify-history.tsv", separator="\t", try_parse_dates=True).with_columns(
+h = pl.read_csv("_data/spotify-history.tsv", separator="\t", try_parse_dates=True).with_columns(
     pl.col("ended_at").dt.convert_time_zone("America/Sao_Paulo"),
     year=pl.col("ended_at").dt.convert_time_zone("America/Sao_Paulo").dt.year(),
 )
-followed = [name.casefold() for name in pl.read_csv("data/artists.tsv", separator="\t")["name"]]
+followed = [name.casefold() for name in pl.read_csv("_data/artists.tsv", separator="\t")["name"]]
 h = h.filter(~pl.col("artist").str.to_lowercase().is_in(followed))
 top_track = h.group_by("artist", "track").agg(ms=pl.col("played_ms").sum()).sort("ms", descending=True).group_by("artist", maintain_order=True).first()
 peak = (
@@ -93,4 +93,4 @@ unfollowed = (
 
 ## Frente 2: pendente
 
-Integrar o histórico ao app. O `AGENTS.md` já previa: agregar por artista (tempo ouvido, última vez ouvido) em `data/` e commitar só o agregado. Lembrar que Last.fm (`just lastfm-compare`) só cobre o recente; o histórico do Spotify cobre 2015–2026. Nada decidido ainda: discutir antes de implementar.
+Integrar o histórico ao app. O `AGENTS.md` já previa: agregar por artista (tempo ouvido, última vez ouvido) em `_data/` e commitar só o agregado. Lembrar que Last.fm (`just lastfm-compare`) só cobre o recente; o histórico do Spotify cobre 2015–2026. Nada decidido ainda: discutir antes de implementar.

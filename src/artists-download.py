@@ -7,7 +7,7 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from tqdm import tqdm
 
-DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR = Path(__file__).parent.parent / "_data"
 CACHE_DIR = DATA_DIR / "artists"
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 CACHE_AGE_MAX = timedelta(days=30)
