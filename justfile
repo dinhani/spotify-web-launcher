@@ -1,6 +1,6 @@
 set windows-shell := ["pwsh.exe", "-NoLogo", "-NoProfile", "-Command"]
 
-export UV_PROJECT_ENVIRONMENT := data_local_directory() / "uv" / "envs" / "spotify-launcher"
+export UV_PROJECT_ENVIRONMENT := data_local_directory() / "_dev" / "uv" / "envs" / "spotify-launcher"
 
 [doc("List tasks")]
 [group("project")]
