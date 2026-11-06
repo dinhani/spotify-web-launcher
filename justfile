@@ -13,7 +13,7 @@ setup:
     uv sync
 
 [doc("List line counts")]
-[group("project")]
+[group("project/report")]
 cloc:
     cloc src
 
