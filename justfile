@@ -1,6 +1,6 @@
 set windows-shell := ["pwsh.exe", "-NoLogo", "-NoProfile", "-Command"]
 
-export UV_PROJECT_ENVIRONMENT := data_local_directory() / "_dev" / "uv" / "envs" / "spotify-launcher"
+export UV_PROJECT_ENVIRONMENT := data_local_directory() / "_dev" / "uv" / "envs" / "spotify-web-launcher"
 
 [doc("List tasks")]
 [group("project")]
@@ -21,7 +21,7 @@ cloc:
 [group("run")]
 render:
     uv run src/artists-render.py
-    Start-Process Z:/apps/web/spotify-launcher.html
+    Start-Process Z:/apps/web/spotify-web-launcher.html
 alias run := render
 
 [doc("Download all datasources")]

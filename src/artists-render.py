@@ -20,7 +20,7 @@ import render.renderer as renderer
 # ------------------------------------------------------------------------------
 INPUT_ARTISTS = "_data/artists.tsv"
 OUTPUT_LAUNCHER = "docs/index.html"
-OUTPUT_LAUNCHER_LOCAL = "Z:/apps/web/spotify-launcher.html"
+OUTPUT_LAUNCHER_LOCAL = "Z:/apps/web/spotify-web-launcher.html"
 OUTPUT_SUMMARY_FAVORITES = "docs/summary-favorites.txt"
 OUTPUT_SUMMARY_TAGS = "docs/summary-tags.txt"
 

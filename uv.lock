@@ -263,7 +263,7 @@ wheels = [
 ]
 
 [[package]]
-name = "spotify-launcher"
+name = "spotify-web-launcher"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
